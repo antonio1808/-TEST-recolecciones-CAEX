@@ -204,27 +204,6 @@
           "comentario": "Solicitud registrada"
         }
       ]
-    },
-    {
-      "codigo": "REC-20260930-32EF",
-      "nombreCliente": "Carlos Culajay",
-      "telefono": "56906202",
-      "email": "carlosbv1808@gmail.com",
-      "direccion": "Centrica Plaza, zona 10",
-      "departamento": "Guatemala",
-      "franjaInicio": "2026-09-30T15:00:00.000Z",
-      "franjaFin": "2026-09-30T17:00:00.000Z",
-      "pesoLb": 30,
-      "idSucursal": 1,
-      "idEstadoActual": 1,
-      "fechaCreacion": "2026-09-30T01:00:37.323Z",
-      "historial": [
-        {
-          "idEstado": 1,
-          "fecha": "2026-09-30T01:00:37.323Z",
-          "comentario": "Solicitud registrada"
-        }
-      ]
     }
   ]
 }
