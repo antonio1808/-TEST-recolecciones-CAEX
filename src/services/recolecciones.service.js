@@ -33,13 +33,18 @@ function asignarSucursal(departamento) {
 
 function validarNueva(datos) {
   const errores = [];
-  const { direccion, departamento, franjaInicio, franjaFin, pesoKg } = datos;
+  const { nombreCliente, telefono, direccion, departamento, franjaInicio, franjaFin, pesoLb } = datos;
+
+  if (!nombreCliente || !String(nombreCliente).trim()) errores.push('El nombre de quien entrega es obligatorio.');
+
+  const tel = String(telefono || '').replace(/[\s-]/g, '');
+  if (!/^\d{8}$/.test(tel)) errores.push('El teléfono es obligatorio y debe tener 8 dígitos.');
 
   if (!direccion || !String(direccion).trim()) errores.push('La dirección es obligatoria.');
   if (!departamento || !String(departamento).trim()) errores.push('El departamento es obligatorio.');
 
-  const peso = Number(pesoKg);
-  if (pesoKg === undefined || pesoKg === null || pesoKg === '' || !Number.isFinite(peso) || peso <= 0) {
+  const peso = Number(pesoLb);
+  if (pesoLb === undefined || pesoLb === null || pesoLb === '' || !Number.isFinite(peso) || peso <= 0) {
     errores.push('El peso debe ser un valor numérico positivo.');
   }
 
@@ -57,7 +62,7 @@ function validarNueva(datos) {
     throw new AppError(400, 'La hora de fin de la franja debe ser posterior a la hora de inicio.');
   }
 
-  return { peso, inicio, fin };
+  return { peso, inicio, fin, tel };
 }
 
 // Convierte el registro interno en la respuesta pública de la API
@@ -75,7 +80,7 @@ function aRespuesta(solicitud) {
     departamento: solicitud.departamento,
     franjaInicio: solicitud.franjaInicio,
     franjaFin: solicitud.franjaFin,
-    pesoKg: solicitud.pesoKg,
+    pesoLb: solicitud.pesoLb,
     fechaCreacion: solicitud.fechaCreacion,
     historial: [...solicitud.historial]
       .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
@@ -84,20 +89,20 @@ function aRespuesta(solicitud) {
 }
 
 function crear(datos) {
-  const { peso, inicio, fin } = validarNueva(datos);
+  const { peso, inicio, fin, tel } = validarNueva(datos);
   const ahora = new Date().toISOString();
   const hub = asignarSucursal(String(datos.departamento).trim());
 
   const solicitud = {
     codigo: generarCodigo(),
-    nombreCliente: datos.nombreCliente?.trim() || null,
-    telefono: datos.telefono?.trim() || null,
+    nombreCliente: String(datos.nombreCliente).trim(),
+    telefono: tel,
     email: datos.email?.trim() || null,
     direccion: String(datos.direccion).trim(),
     departamento: String(datos.departamento).trim(),
     franjaInicio: inicio.toISOString(),
     franjaFin: fin.toISOString(),
-    pesoKg: peso,
+    pesoLb: peso,
     idSucursal: hub.id,
     idEstadoActual: 1,
     fechaCreacion: ahora,

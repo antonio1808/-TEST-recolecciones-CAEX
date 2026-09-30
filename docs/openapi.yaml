@@ -19,16 +19,16 @@ components:
   schemas:
     NuevaSolicitud:
       type: object
-      required: [direccion, departamento, franjaInicio, franjaFin, pesoKg]
+      required: [nombreCliente, telefono, direccion, departamento, franjaInicio, franjaFin, pesoLb]
       properties:
         nombreCliente: { type: string, example: "Carlos Méndez" }
-        telefono: { type: string, example: "55559999" }
+        telefono: { type: string, description: "8 dígitos", example: "55559999" }
         email: { type: string, example: "carlos@correo.com" }
         direccion: { type: string, example: "6a avenida 8-10 zona 10, Guatemala" }
         departamento: { type: string, example: "Guatemala" }
         franjaInicio: { type: string, format: date-time, example: "2026-12-15T15:00:00.000Z" }
         franjaFin: { type: string, format: date-time, example: "2026-12-15T17:00:00.000Z" }
-        pesoKg: { type: number, example: 3.5 }
+        pesoLb: { type: number, description: "Peso aproximado en libras", example: 8 }
     CambioEstado:
       type: object
       required: [estado]
@@ -49,7 +49,7 @@ components:
         departamento: { type: string }
         franjaInicio: { type: string, format: date-time }
         franjaFin: { type: string, format: date-time }
-        pesoKg: { type: number }
+        pesoLb: { type: number, description: "Libras" }
         fechaCreacion: { type: string, format: date-time }
         historial:
           type: array

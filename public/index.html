@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recolecciones | Cargo Expreso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <p class="brand">Cargo Expreso</p>
+      <h1>Recolecciones a domicilio</h1>
+      <p class="lead">Pide que recojamos tu paquete en casa u oficina y sigue cada paso con tu código.</p>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <!-- Formulario de solicitud -->
+    <section class="panel" aria-labelledby="t-solicitar">
+      <h2 id="t-solicitar">Solicitar recolección</h2>
+
+      <form id="form-solicitud" novalidate>
+        <div class="row">
+          <label>Nombre *
+            <input name="nombreCliente" type="text" autocomplete="name" placeholder="Nombre de quien entrega" />
+            <span class="err" data-for="nombreCliente"></span>
+          </label>
+          <label>Teléfono *
+            <input name="telefono" type="tel" inputmode="numeric" maxlength="9" placeholder="5555 1234" />
+            <span class="err" data-for="telefono"></span>
+          </label>
+        </div>
+
+        <label>Correo (opcional)
+          <input name="email" type="email" placeholder="para avisarte de cada cambio" />
+        </label>
+
+        <label>Dirección de recolección *
+          <input name="direccion" type="text" placeholder="Calle, número, zona, municipio" />
+          <span class="err" data-for="direccion"></span>
+        </label>
+
+        <label>Departamento *
+          <select name="departamento" id="departamento"></select>
+          <span class="err" data-for="departamento"></span>
+        </label>
+
+        <fieldset>
+          <legend>Franja horaria *</legend>
+          <div class="row three">
+            <label>Fecha <input name="fecha" type="date" id="fecha" /></label>
+            <label>Desde <input name="horaInicio" type="time" value="09:00" /></label>
+            <label>Hasta <input name="horaFin" type="time" value="11:00" /></label>
+          </div>
+          <span class="err" data-for="franja"></span>
+        </fieldset>
+
+        <label>Peso aproximado (lb) *
+          <input name="pesoLb" type="number" min="0.1" step="0.1" placeholder="8" />
+          <span class="err" data-for="pesoLb"></span>
+        </label>
+
+        <button type="submit" class="btn primary" id="btn-enviar">Solicitar recolección</button>
+        <p class="msg" id="msg-form" role="alert"></p>
+      </form>
+
+      <div id="confirmacion" class="label-card" hidden>
+        <p>Tu código de solicitud</p>
+        <p class="code" id="codigo-nuevo"></p>
+        <p class="small">Guárdalo para consultar el estado. Te asignamos: <strong id="hub-nuevo"></strong></p>
+        <div class="actions">
+          <button type="button" class="btn" id="btn-copiar">Copiar código</button>
+          <button type="button" class="btn" id="btn-ver-nuevo">Ver seguimiento</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consulta -->
+    <section class="panel" aria-labelledby="t-consultar">
+      <h2 id="t-consultar">Consultar solicitud</h2>
+
+      <form id="form-consulta" class="search" novalidate>
+        <label class="sr-only" for="codigo">Código de solicitud</label>
+        <input id="codigo" type="text" placeholder="REC-20260925-C3D4" autocomplete="off" />
+        <button type="submit" class="btn primary">Consultar</button>
+      </form>
+
+      <p class="small">Códigos de ejemplo:
+        <button type="button" class="chip" data-code="REC-20260920-A1B2">Recolectado</button>
+        <button type="button" class="chip" data-code="REC-20260925-C3D4">En camino</button>
+        <button type="button" class="chip" data-code="REC-20260926-E5F6">Pendiente</button>
+        <button type="button" class="chip" data-code="REC-20260927-G7H8">Cancelada</button>
+      </p>
+
+      <p class="msg" id="msg-consulta" role="alert"></p>
+
+      <article id="resultado" hidden>
+        <div class="summary">
+          <div>
+            <p class="small">Solicitud</p>
+            <p class="code" id="r-codigo"></p>
+          </div>
+          <span class="badge" id="r-estado"></span>
+        </div>
+
+        <dl class="facts">
+          <div><dt>Sucursal asignada</dt><dd id="r-sucursal"></dd></div>
+          <div><dt>Dirección</dt><dd id="r-direccion"></dd></div>
+          <div><dt>Franja</dt><dd id="r-franja"></dd></div>
+          <div><dt>Peso</dt><dd id="r-peso"></dd></div>
+        </dl>
+
+        <h3>Historial</h3>
+        <div class="timeline-scroll">
+          <ol class="timeline" id="timeline"></ol>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
