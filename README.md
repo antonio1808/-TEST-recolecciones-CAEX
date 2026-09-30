@@ -184,9 +184,6 @@ erDiagram
 
 - La API Key está visible en el JavaScript del frontend porque es una demo. En producción se usaría un backend-for-frontend o autenticación de usuarios para no exponerla.
 - El almacenamiento en JSON es suficiente para la prueba, pero no maneja concurrencia; en producción se usaría SQL Server con el mismo modelo de datos.
-- El peso se maneja en libras (`pesoLb`), la unidad de uso común en Guatemala; el enunciado no especificaba unidad.
-- El nombre y el teléfono son obligatorios porque el recolector necesita a quién contactar y la notificación SMS requiere un número. El correo es opcional.
-- Las fechas se guardan en UTC (ISO 8601) y el frontend las muestra en la zona horaria local del navegador.
 
 ## Uso de IA
 
@@ -194,6 +191,7 @@ Se utilizó **Claude (Anthropic)** como asistente durante el desarrollo, para:
 
 - Analizar el enunciado e identificar supuestos no definidos (cómo se cambia el estado, cómo se asigna la sucursal, cómo modelar la franja horaria).
 - Proponer la arquitectura por capas y el modelo de datos.
-- Generar la base del código de backend, frontend, Swagger y Dockerfile.
+- Generar Frontend con especificaciones siguiendo la paleta de colores del negocio.
+- Generar documentación del proyecto con el fin de tener todos los puntos claros 
 
-Se eligió porque permitía cumplir el alcance completo en el tiempo disponible. Todo el código fue revisado, ejecutado y probado manualmente (casos 200, 201, 400, 401 y 404, cambio de estado y vista móvil).
+Se eligió debido a que es una excelente IA para crear Mockups y no tener que invertir tiempo en pensar en el diseño. Además, se utilizó para analizar posibles vacíos dentro del enunciado de la prueba, y cómo último punto es una buena herramienta para documentar proyectos.
