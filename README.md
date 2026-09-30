@@ -1,4 +1,5 @@
-# Recolecciones Cargo Expreso
+# Prueba para puesto de desarrollador en CAEX
+## Recolecciones Cargo Expreso
 
 Portal de autoservicio para solicitar la recolección de un paquete a domicilio u oficina y consultar su estado con un código de solicitud. Incluye API REST protegida con API Key, frontend responsivo con línea de tiempo horizontal, documentación Swagger y Dockerfile.
 
