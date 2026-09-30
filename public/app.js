@@ -32,7 +32,15 @@ const fmtFecha = iso =>
   new Date(iso).toLocaleString('es-GT', { dateStyle: 'medium', timeStyle: 'short' });
 
 const fmtHora = iso =>
-  new Date(iso).toLocaleTimeString('es-GT', { hour: '2-digit', minute: '2-digit' });
+  new Date(iso).toLocaleTimeString('es-GT', { hour: 'numeric', minute: '2-digit' });
+
+// "viernes, 2 de octubre" -> "Viernes 2 de octubre"
+const fmtDia = iso => {
+  const txt = new Date(iso)
+    .toLocaleDateString('es-GT', { weekday: 'long', day: 'numeric', month: 'long' })
+    .replace(',', '');
+  return txt.charAt(0).toUpperCase() + txt.slice(1);
+};
 
 /* ---------- Formulario de solicitud ---------- */
 
@@ -163,7 +171,8 @@ function pintarResultado(s) {
   $('#r-codigo').textContent = s.codigo;
   $('#r-sucursal').textContent = s.sucursal;
   $('#r-direccion').textContent = `${s.direccion} (${s.departamento})`;
-  $('#r-franja').textContent = `${fmtFecha(s.franjaInicio)} a ${fmtHora(s.franjaFin)}`;
+  $('#r-fecha').textContent = fmtDia(s.franjaInicio);
+  $('#r-horario').textContent = `${fmtHora(s.franjaInicio)} – ${fmtHora(s.franjaFin)}`;
   $('#r-peso').textContent = `${s.pesoLb} lb`;
 
   const badge = $('#r-estado');
