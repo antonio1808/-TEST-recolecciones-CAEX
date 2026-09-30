@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: API de Recolecciones - Cargo Expreso
+  version: 1.0.0
+  description: |
+    Registro y seguimiento de solicitudes de recolección.
+    Todas las rutas requieren el header `x-api-key` (usa el botón **Authorize**).
+    API Key de demo: `caex-demo-key-2026`
+servers:
+  - url: /
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    NuevaSolicitud:
+      type: object
+      required: [direccion, departamento, franjaInicio, franjaFin, pesoKg]
+      properties:
+        nombreCliente: { type: string, example: "Carlos Méndez" }
+        telefono: { type: string, example: "55559999" }
+        email: { type: string, example: "carlos@correo.com" }
+        direccion: { type: string, example: "6a avenida 8-10 zona 10, Guatemala" }
+        departamento: { type: string, example: "Guatemala" }
+        franjaInicio: { type: string, format: date-time, example: "2026-12-15T15:00:00.000Z" }
+        franjaFin: { type: string, format: date-time, example: "2026-12-15T17:00:00.000Z" }
+        pesoKg: { type: number, example: 3.5 }
+    CambioEstado:
+      type: object
+      required: [estado]
+      properties:
+        estado:
+          type: string
+          enum: ["Recolector en Camino", "Recolectado", "Cancelada"]
+          example: "Recolector en Camino"
+        comentario: { type: string, example: "Recolector asignado" }
+    Solicitud:
+      type: object
+      properties:
+        codigo: { type: string, example: "REC-20260925-C3D4" }
+        estadoActual: { type: string, example: "Recolector en Camino" }
+        sucursal: { type: string, example: "Hub Quetzaltenango" }
+        nombreCliente: { type: string }
+        direccion: { type: string }
+        departamento: { type: string }
+        franjaInicio: { type: string, format: date-time }
+        franjaFin: { type: string, format: date-time }
+        pesoKg: { type: number }
+        fechaCreacion: { type: string, format: date-time }
+        historial:
+          type: array
+          items:
+            type: object
+            properties:
+              estado: { type: string }
+              fecha: { type: string, format: date-time }
+              comentario: { type: string, nullable: true }
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+        mensaje: { type: string }
+        detalles: { type: array, items: { type: string } }
+paths:
+  /api/recolecciones:
+    post:
+      summary: Registrar una nueva solicitud de recolección
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NuevaSolicitud' }
+      responses:
+        '201':
+          description: Solicitud creada; retorna el código único
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Solicitud' }
+        '400':
+          description: Datos inválidos o franja horaria en el pasado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: API Key inválida o ausente
+  /api/recolecciones/{codigo}:
+    get:
+      summary: Consultar el estado de una solicitud
+      parameters:
+        - in: path
+          name: codigo
+          required: true
+          schema: { type: string, example: "REC-20260925-C3D4" }
+      responses:
+        '200':
+          description: Solicitud encontrada
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Solicitud' }
+        '404':
+          description: El código no existe
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: API Key inválida o ausente
+  /api/recolecciones/{codigo}/estado:
+    patch:
+      summary: Cambiar el estado de una solicitud (dispara notificación simulada)
+      parameters:
+        - in: path
+          name: codigo
+          required: true
+          schema: { type: string, example: "REC-20260926-E5F6" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CambioEstado' }
+      responses:
+        '200':
+          description: Estado actualizado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Solicitud' }
+        '400':
+          description: Estado inválido o transición no permitida
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: El código no existe
+        '401':
+          description: API Key inválida o ausente

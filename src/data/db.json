@@ -1,0 +1,235 @@
+{
+  "estados": [
+    {
+      "id": 1,
+      "nombre": "Pendiente de Asignación",
+      "orden": 1,
+      "esFinal": false
+    },
+    {
+      "id": 2,
+      "nombre": "Recolector en Camino",
+      "orden": 2,
+      "esFinal": false
+    },
+    {
+      "id": 3,
+      "nombre": "Recolectado",
+      "orden": 3,
+      "esFinal": true
+    },
+    {
+      "id": 4,
+      "nombre": "Cancelada",
+      "orden": 99,
+      "esFinal": true
+    }
+  ],
+  "sucursales": [
+    {
+      "id": 1,
+      "nombre": "Sucursal Central Mixco",
+      "cobertura": [
+        "Guatemala",
+        "Sacatepéquez",
+        "Chimaltenango"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Hub Quetzaltenango",
+      "cobertura": [
+        "Quetzaltenango",
+        "San Marcos",
+        "Totonicapán",
+        "Huehuetenango",
+        "Retalhuleu"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Hub Zacapa",
+      "cobertura": [
+        "Zacapa",
+        "Chiquimula",
+        "Izabal",
+        "El Progreso",
+        "Jalapa"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Hub Cobán",
+      "cobertura": [
+        "Alta Verapaz",
+        "Baja Verapaz",
+        "Petén",
+        "Quiché"
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Hub Escuintla",
+      "cobertura": [
+        "Escuintla",
+        "Santa Rosa",
+        "Jutiapa",
+        "Suchitepéquez",
+        "Sololá"
+      ]
+    }
+  ],
+  "solicitudes": [
+    {
+      "codigo": "REC-20260920-A1B2",
+      "nombreCliente": "María López",
+      "telefono": "55551234",
+      "email": "maria.lopez@correo.com",
+      "direccion": "12 calle 5-20 zona 1, Mixco",
+      "departamento": "Guatemala",
+      "franjaInicio": "2026-09-21T15:00:00.000Z",
+      "franjaFin": "2026-09-21T17:00:00.000Z",
+      "pesoKg": 2.5,
+      "idSucursal": 1,
+      "idEstadoActual": 3,
+      "fechaCreacion": "2026-09-20T14:10:00.000Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-20T14:10:00.000Z",
+          "comentario": "Solicitud registrada"
+        },
+        {
+          "idEstado": 2,
+          "fecha": "2026-09-21T14:30:00.000Z",
+          "comentario": "Recolector asignado"
+        },
+        {
+          "idEstado": 3,
+          "fecha": "2026-09-21T15:45:00.000Z",
+          "comentario": "Paquete recolectado"
+        }
+      ]
+    },
+    {
+      "codigo": "REC-20260925-C3D4",
+      "nombreCliente": "José Pérez",
+      "telefono": "44443210",
+      "email": null,
+      "direccion": "4a avenida 10-15 zona 3, Quetzaltenango",
+      "departamento": "Quetzaltenango",
+      "franjaInicio": "2026-10-02T14:00:00.000Z",
+      "franjaFin": "2026-10-02T16:00:00.000Z",
+      "pesoKg": 8,
+      "idSucursal": 2,
+      "idEstadoActual": 2,
+      "fechaCreacion": "2026-09-25T16:00:00.000Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-25T16:00:00.000Z",
+          "comentario": "Solicitud registrada"
+        },
+        {
+          "idEstado": 2,
+          "fecha": "2026-09-28T13:20:00.000Z",
+          "comentario": "Recolector asignado"
+        }
+      ]
+    },
+    {
+      "codigo": "REC-20260926-E5F6",
+      "nombreCliente": "Ana Morales",
+      "telefono": null,
+      "email": "ana.morales@correo.com",
+      "direccion": "Barrio El Centro, Zacapa",
+      "departamento": "Zacapa",
+      "franjaInicio": "2026-10-05T15:00:00.000Z",
+      "franjaFin": "2026-10-05T18:00:00.000Z",
+      "pesoKg": 1.2,
+      "idSucursal": 3,
+      "idEstadoActual": 1,
+      "fechaCreacion": "2026-09-26T18:30:00.000Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-26T18:30:00.000Z",
+          "comentario": "Solicitud registrada"
+        }
+      ]
+    },
+    {
+      "codigo": "REC-20260927-G7H8",
+      "nombreCliente": "Luis Coc",
+      "telefono": "33332222",
+      "email": null,
+      "direccion": "1a calle 3-40 zona 2, Cobán",
+      "departamento": "Alta Verapaz",
+      "franjaInicio": "2026-09-30T15:00:00.000Z",
+      "franjaFin": "2026-09-30T17:00:00.000Z",
+      "pesoKg": 15,
+      "idSucursal": 4,
+      "idEstadoActual": 4,
+      "fechaCreacion": "2026-09-27T12:00:00.000Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-27T12:00:00.000Z",
+          "comentario": "Solicitud registrada"
+        },
+        {
+          "idEstado": 4,
+          "fecha": "2026-09-28T09:15:00.000Z",
+          "comentario": "Cancelada por el cliente"
+        }
+      ]
+    },
+    {
+      "codigo": "REC-20260928-J9K0",
+      "nombreCliente": "Carmen Ruiz",
+      "telefono": "22221111",
+      "email": "carmen.ruiz@correo.com",
+      "direccion": "Km 58 carretera al Pacífico, Escuintla",
+      "departamento": "Escuintla",
+      "franjaInicio": "2026-10-07T14:00:00.000Z",
+      "franjaFin": "2026-10-07T16:00:00.000Z",
+      "pesoKg": 4.75,
+      "idSucursal": 5,
+      "idEstadoActual": 1,
+      "fechaCreacion": "2026-09-28T20:05:00.000Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-28T20:05:00.000Z",
+          "comentario": "Solicitud registrada"
+        }
+      ]
+    },
+    {
+      "codigo": "REC-20260930-AC4A",
+      "nombreCliente": "Carlos Méndez",
+      "telefono": "55559999",
+      "email": "carlos@correo.com",
+      "direccion": "6a avenida 8-10 zona 10, Guatemala",
+      "departamento": "Guatemala",
+      "franjaInicio": "2026-12-15T15:00:00.000Z",
+      "franjaFin": "2026-12-15T17:00:00.000Z",
+      "pesoKg": 3.5,
+      "idSucursal": 1,
+      "idEstadoActual": 2,
+      "fechaCreacion": "2026-09-30T00:43:39.425Z",
+      "historial": [
+        {
+          "idEstado": 1,
+          "fecha": "2026-09-30T00:43:39.425Z",
+          "comentario": "Solicitud registrada"
+        },
+        {
+          "idEstado": 2,
+          "fecha": "2026-09-30T00:44:59.780Z",
+          "comentario": "Recolector asignado"
+        }
+      ]
+    }
+  ]
+}
